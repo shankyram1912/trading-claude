@@ -23,10 +23,6 @@
 # Personal settings override (never share)
 .claude/settings.local.json
 
-# Plugin cache — rebuilt automatically
-.claude/plugins/cache/
-.claude/plugins/plugin-catalog-cache.json
-
 # Claude auth at home dir (just in case)
 ~/.claude.json
 ~/.credentials.json
