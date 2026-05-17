@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 # ─────────────────────────────────────────────────────────────────────────────
 # Daily Market Tracker
 # Claude reads the portfolio snapshot → determines all symbols to track →

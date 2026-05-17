@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 cd /data/tools/trading-claude
 
