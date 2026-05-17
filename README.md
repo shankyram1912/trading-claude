@@ -12,12 +12,6 @@ trading-claude/
 ├── .claude/
 │   ├── settings.json                # permissions, MCP config
 │   ├── mcp.json                     # MCP server definitions
-│   ├── plugins/
-│   │   └── installed_plugins.json   # Discord plugin manifest
-│   ├── channels/
-│   │   └── discord/
-│   │       ├── access.json          # allowlist policy (committed)
-│   │       └── .env                 # bot token (gitignored — create locally)
 │   ├── rules/                       # trading-specific rules (future)
 │   ├── skills/                      # reusable workflows (future)
 │   └── agents/                      # subagent personas (future)
@@ -39,8 +33,9 @@ trading-claude/
 
 ## Prerequisites
 
-- Claude Code installed (`which claude` returns a path)
-- Discord bot token (see below)
+- Linux machine with systemd
+- Claude Code installed (see below)
+- Discord bot created in [Discord Developer Portal](https://discord.com/developers/applications)
 - MCP servers configured in `.claude/mcp.json`
 
 ---
@@ -55,50 +50,93 @@ cd /data/tools/trading-claude
 # 2. Install Claude Code
 curl -fsSL https://claude.ai/install.sh | bash
 
-# 3. Create Discord .env with bot token (gitignored — see Discord section below)
-cat > .claude/channels/discord/.env << 'EOF'
-DISCORD_BOT_TOKEN=your_bot_token_here
-EOF
-
-# 4. Create logs dir
+# 3. Create logs dir
 mkdir -p /data/tools/trading-claude/logs
 
-# 5. Install systemd daemon (see Daemon section below)
-# 6. Install cron (see Cron section below)
+# 4. Install Discord plugin (see Discord section below)
+# 5. Configure Discord bot token (see Discord section below)
+# 6. Install systemd daemon (see Daemon section below)
+# 7. Install cron (see Cron section below)
 ```
 
 ---
-
-## Discord bot token
-
-The Discord plugin requires a bot token stored in `.claude/channels/discord/.env`.
-This file is gitignored — you must create it manually on each machine.
-
-```bash
-cat > /data/tools/trading-claude/.claude/channels/discord/.env << 'EOF'
-DISCORD_BOT_TOKEN=your_bot_token_here
-EOF
-```
-
-Get your bot token from the [Discord Developer Portal](https://discord.com/developers/applications).
-
----
-
 
 ## Install Discord plugin
 
 Plugins are user-scoped — installed once per machine to `~/.claude/`, not per project.
 
 ```bash
-# Register the official marketplace
+# Register the official marketplace (skips if already registered)
 claude plugin marketplace add anthropics/claude-plugins-official
 
-# Install Discord plugin
+# Install Discord plugin (skips if already installed)
 claude plugin install discord@claude-plugins-official
 
 # Verify
 claude plugin list
 ```
+
+Do this before starting the daemon, otherwise the `--channels` flag will fail.
+
+---
+
+## Configure Discord bot
+
+The Discord plugin manages the bot token internally — no manual `.env` creation needed.
+
+### Step 1 — start Claude with Discord channel
+
+```bash
+cd /data/tools/trading-claude
+claude --channels plugin:discord@claude-plugins-official
+```
+
+### Step 2 — configure bot token
+
+Inside Claude:
+
+```
+/discord:configure <your-bot-token>
+```
+
+Get your token from the [Discord Developer Portal](https://discord.com/developers/applications) → your app → Bot → Reset Token.
+
+### Step 3 — pair your account
+
+DM your bot on Discord. The bot replies with a pairing code.
+
+> **Note:** If your bot doesn't respond, make sure Claude Code is running with `--channels` from Step 1. The bot can only reply while the channel is active.
+
+Back in Claude Code, run:
+
+```
+/discord:access pair <code>
+```
+
+### Step 4 — lock down access
+
+Lock access so only your account can send messages:
+
+```
+/discord:access policy allowlist
+```
+
+### Step 5 — verify
+
+```
+/mcp
+```
+
+Should show `Reconnected to plugin:discord:discord`. Bot should appear green in Discord.
+
+### Reconfigure token (if token changes)
+
+```
+/discord:configure <new-token>
+/reload-plugins
+```
+
+---
 
 ## Daemon — Claude with Discord
 
@@ -127,7 +165,7 @@ sudo systemctl status claude-daemon
 ### View logs
 
 ```bash
-sudo journalctl -u claude-daemon -f
+sudo journalctl -u claude-daemon -f --output=cat
 ```
 
 ### Restart
@@ -219,11 +257,10 @@ git push
 
 | File | Reason |
 |---|---|
-| `.claude/channels/discord/.env` | `DISCORD_BOT_TOKEN` — secret |
+| `~/.claude/channels/discord/.env` | Bot token — managed by `/discord:configure` |
+| `~/.claude/plugins/` | Plugin binaries — reinstall via `claude plugin install` |
 | `.claude/settings.local.json` | Personal overrides |
 | `.claude/projects/` | Session transcripts |
 | `.claude/cache/` | Runtime cache |
-| `.claude/plugins/cache/` | Plugin binaries |
-| `.claude/plugins/plugin-catalog-cache.json` | Plugin catalog cache |
 | `sandbox/.venv/` | Python venv |
 | `logs/` | Runtime logs |
