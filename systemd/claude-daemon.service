@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-User=root
+User=shankyram
 WorkingDirectory=/data/tools/trading-claude
 ExecStart=/bin/bash /data/tools/trading-claude/scripts/claude_daemon.sh
 Restart=always
