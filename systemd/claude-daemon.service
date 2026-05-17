@@ -1,14 +1,15 @@
 [Unit]
-Description=Claude Channel Plugin Daemon
-After=network-online.target
-Wants=network-online.target
+Description=Claude Discord Plugin Daemon
+After=network.target
 
 [Service]
-Type=simple
+Type=forking
 User=shankyram
-WorkingDirectory=/data/tools/trading-claude
-ExecStart=/bin/bash /data/tools/trading-claude/scripts/claude_daemon.sh
-Restart=always
+Environment="HOME=/home/shankyram"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+ExecStart=/usr/bin/tmux new-session -d -s claude-daemon 'bash /data/tools/trading-claude/scripts/claude_daemon.sh'
+ExecStop=/usr/bin/tmux kill-session -t claude-daemon
+Restart=on-failure
 RestartSec=10
 
 [Install]
