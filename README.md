@@ -84,6 +84,25 @@ Get your bot token from the [Discord Developer Portal](https://discord.com/devel
 
 ---
 
+
+## Install Discord plugin
+
+The Discord plugin must be installed on each machine — the cache is not committed to git.
+
+```bash
+cd /data/tools/trading-claude
+claude plugin install discord
+```
+
+Verify it's installed:
+
+```bash
+claude plugin list
+```
+
+Do this before starting the daemon, otherwise the `--channels` flag will fail.
+
+
 ## Daemon — Claude with Discord
 
 The daemon runs Claude Code persistently with the Discord plugin, restarting automatically on failure.
