@@ -1,0 +1,133 @@
+# ============================================================
+# trading-claude .gitignore
+# ============================================================
+
+# ------------------------------------------------------------
+# Claude — auth, secrets, runtime data
+# ------------------------------------------------------------
+.claude/projects/
+.claude/cache/
+.claude/file-history/
+.claude/sessions/
+.claude/paste-cache/
+.claude/backups/
+.claude/history.jsonl
+.claude/.last-cleanup
+.claude/.claude.json
+.claude/.credentials.json
+.claude/mcp-needs-auth-cache.json
+.claude/session-env/
+.claude/tools/
+.claude/plans/
+
+# Personal settings override (never share)
+.claude/settings.local.json
+
+# Plugin cache — rebuilt automatically
+.claude/plugins/cache/
+.claude/plugins/plugin-catalog-cache.json
+
+# Claude auth at home dir (just in case)
+~/.claude.json
+~/.credentials.json
+
+# ------------------------------------------------------------
+# Discord — secrets
+# ------------------------------------------------------------
+channels/discord/.env
+channels/discord/.env.*
+
+# ------------------------------------------------------------
+# Sandbox — runtime artifacts
+# ------------------------------------------------------------
+sandbox/.venv/
+sandbox/__pycache__/
+sandbox/*.pyc
+sandbox/*.pyo
+sandbox/*.egg-info/
+sandbox/dist/
+sandbox/build/
+sandbox/.pytest_cache/
+sandbox/*.log
+
+# ------------------------------------------------------------
+# Python general
+# ------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.whl
+.installed.cfg
+*.manifest
+.env
+.venv
+env/
+venv/
+ENV/
+
+# ------------------------------------------------------------
+# Secrets and credentials (catch-all)
+# ------------------------------------------------------------
+*.env
+*.env.*
+!*.env.example
+secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*_secret*
+*_token*
+api_keys.*
+
+# ------------------------------------------------------------
+# Logs and runtime
+# ------------------------------------------------------------
+*.log
+*.jsonl
+logs/
+tmp/
+temp/
+.tmp/
+
+# ------------------------------------------------------------
+# OS
+# ------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ------------------------------------------------------------
+# Editors
+# ------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace

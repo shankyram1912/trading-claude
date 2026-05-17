@@ -1,0 +1,49 @@
+snapshot_date: "2026-05-16"
+note: >
+  Total portfolio across all brokers.
+  GAIL and NTPC quantities are absolute totals — do not add Zerodha figures on top.
+  GOLDBEES, SILVERBEES are Zerodha only.
+  Values in ₹ Lakhs (L). 1L = ₹1,00,000.
+
+positions:
+
+  - symbol:        GAIL
+    exchange:      BSE
+    total_qty:     63290
+    avg:           ₹182.30
+    last_price:    ₹161.95
+    value:         ₹102.44L
+    pnl:           -₹12.88L
+    pnl_pct:       -11.16%
+
+  - symbol:        NTPC
+    exchange:      NSE
+    total_qty:     22625
+    avg:           ₹342.40
+    last_price:    ₹395.25
+    value:         ₹89.46L
+    pnl:           +₹11.96L
+    pnl_pct:       +15.43%
+
+  - symbol:        GOLDBEES
+    exchange:      NSE
+    total_qty:     15500
+    avg:           ₹127.68
+    last_price:    ₹129.41
+    value:         ₹20.09L
+    pnl:           +₹0.27L
+    pnl_pct:       +1.36%
+
+  - symbol:        SILVERBEES
+    exchange:      NSE
+    total_qty:     6275
+    avg:           ₹238.76
+    last_price:    ₹249.85
+    value:         ₹15.68L
+    pnl:           +₹0.70L
+    pnl_pct:       +4.64%
+
+summary:
+  total_value:   ₹227.66L
+  total_pnl:     +₹0.05L
+  total_pnl_pct: +0.02%

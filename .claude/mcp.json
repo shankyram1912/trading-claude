@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "tradingview": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/data/tools/tradingview/git/tradingview-mcp/src/server.js"]
+    },
+    "kite": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://mcp.kite.trade/mcp"]
+    }
+  }
+}
