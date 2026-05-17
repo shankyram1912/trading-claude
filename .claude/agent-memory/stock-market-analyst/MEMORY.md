@@ -1,0 +1,3 @@
+- [User Profile](user_profile.md) — Shanky: KL-based NSE/BSE trader, mobile-first analysis, Zerodha/Kite
+- [Portfolio Symbols](portfolio_symbols.md) — Exchange prefixes for GAIL, NTPC, GOLDBEES, SILVERBEES
+- [GOLDBEES Analysis](goldbees_analysis.md) — Key levels, macro context, accumulation zones as of 2026-05-17

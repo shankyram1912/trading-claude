@@ -165,7 +165,7 @@ sudo systemctl status claude-daemon
 ### View logs
 
 ```bash
-sudo journalctl -u claude-daemon -f --output=cat
+sudo journalctl -u claude-daemon -f --output=cat -n 20
 ```
 
 ### Restart
