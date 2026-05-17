@@ -34,8 +34,8 @@
 # ------------------------------------------------------------
 # Discord — secrets
 # ------------------------------------------------------------
-channels/discord/.env
-channels/discord/.env.*
+.claude/channels/discord/.env
+.claude/channels/discord/.env.*
 
 # ------------------------------------------------------------
 # Sandbox — runtime artifacts
